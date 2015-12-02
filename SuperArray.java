@@ -25,34 +25,37 @@ public class SuperArray {
     private int _lastPos;
 
 		//size of this instance of SuperArray
-		private int _size;
+    private int _size;
 	
 		//~~~~~METHODS~~~~~
     //default constructor – initializes 10-item array
     public SuperArray() {
-	_lastPos = 0;
-	_size = 10;
+	_lastPos = -1;
+	_size = 0;
 	_data = new int[10];
     }
 		
     //output array in [a,b,c] format, eg
     // {1,2,3}.toString() -> "[1,2,3]"
     public String toString() {
-	String retStr = "";
-	for (int i=0; i< _size; i++) {
-	    retStr += i + ":\t" + _data[i] + "\n";
-	}
-	return retStr;
+	String retArray = "[";
+	for (int i = 0; i < _data.length; i++){
+	    retArray += _data[i];
+	    retArray += ",";}
+	if (retArray.length() > 1){
+	    retArray = retArray.substring(0, retArray.length()-1) ;}
+        retArray += "]";
+	return retArray;
     }
+
 		
     //double capacity of this SuperArray
     private void expand() { 
-        int[] modArr = new int[_size *2];
-	for (int i=0; i<_size; i++){
+        int[] modArr = new int[_data.length *2];
+	for (int i=0; i< _data.length; i++){
 	    modArr[i] = _data[i];
 	}
 	_data = modArr;
-	_size *= 2;
     }
 		
     //accessor -- return value at specified index
@@ -73,7 +76,7 @@ public class SuperArray {
     //main method for testing
     public static void main( String[] args ) {
 	SuperArray fleetwood = new SuperArray(); //next, populate superArray
-	for (int i=0;i<fleetwood._size; i++) fleetwood.set(i,i+1);
+	for (int i=0;i<fleetwood._data.length; i++) fleetwood.set(i,i+1);
 	System.out.println( fleetwood.toString()); //test
 
 	System.out.println("Fleetwood.get(5):\t" + fleetwood.get(5) + "\n");
