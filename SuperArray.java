@@ -90,12 +90,13 @@ public class SuperArray {
       if (a[i] == (target)){
         counter += 1;}}}
     return counter;}
+    //#throwbackthursdays
     
 
     public void alignLeft() {
-	int counter = freq (_data,0);
-	int[] modArr = new int [_data.length - counter];
-	int shifter = 0;
+	int counter = freq (_data,0); // records the number of 0s
+	int[] modArr = new int [_data.length - counter]; //creates a new array with length subtracted by the number of zeroes
+	int shifter = 0; // skips over 0s
 	
 	for (int i = 0; i < modArr.length; i++){
 	    if((i+shifter) < _data.length){
@@ -106,6 +107,22 @@ public class SuperArray {
 		    shifter += 1;}
 		modArr[i] =_data[i+shifter];}}}
 	_data = modArr;}
+
+    //I didn't use alignLeft in remove because the user might still want 0s in their array. 
+    public void remove (int index){
+	set (index, 0);
+	int [] modArr= new int [_data.length-1];
+	int shifter = 0;
+	for (int i = 0; i < modArr.length; i++){
+	     if((i+shifter) < _data.length){
+	    if (_data[i+shifter] != 0){
+		modArr[i] =_data[i+shifter];}
+	    else {
+		if ((_data[i+shifter]) == 0){
+		    shifter = 1;}
+		modArr[i] =_data[i+shifter];}}}
+	_data = modArr;}
+
 		
 	    
 	    
@@ -123,10 +140,19 @@ public class SuperArray {
 	
 	fleetwood.expand();
 	System.out.println("EXPANDED:\n" + fleetwood.toString());
+
+	fleetwood.remove (0);//removes 1
+	fleetwood.remove (11);//removes 0
+	fleetwood.remove (3);//removes 5
+	System.out.println("REMOVED:\n" + fleetwood.toString());
+
+	fleetwood.set (0,0);
 	fleetwood.set (1,0);
 	fleetwood.set (5,0);
-	System.out.println("Ugly 0:\n" + fleetwood.toString());
+	System.out.println("ADDED UGLY ZEROES:\n" + fleetwood.toString());//For testing left alignment
+
 	fleetwood.alignLeft();
-	System.out.println("Lefted:\n" + fleetwood.toString());
+	System.out.println("LEFTED:\n" + fleetwood.toString());//To the left, to the left
+
     }//end main	
 }//end class
