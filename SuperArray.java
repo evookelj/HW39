@@ -50,9 +50,9 @@ public class SuperArray {
 
 		
     //double capacity of this SuperArray
-    private void expand() { 
+    public void expand() { 
         int[] modArr = new int[_data.length *2];
-	for (int i=0; i< _data.length; i++){
+       	for (int i=0; i< _data.length; i++){
 	    modArr[i] = _data[i];
 	}
 	_data = modArr;
@@ -71,6 +71,46 @@ public class SuperArray {
 	_data[index] = newVal;
 	return old;
     }
+    
+
+  
+    //help from some old friends
+      public static boolean linSearch (int[] a, int target){
+    for (int i = 0; i < a.length; i++){
+	if  (a[i] == target){
+	    return true;}}
+    return false;}
+
+    public static int freq (int[] a, int target){
+    int counter = 0;
+    if (linSearch (a,target) == false){
+      return 0;}
+    else{
+      for (int i = 0; i < a.length; i++){
+      if (a[i] == (target)){
+        counter += 1;}}}
+    return counter;}
+    
+
+    public void alignLeft() {
+	int counter = freq (_data,0);
+	int[] modArr = new int [_data.length - counter];
+	int shifter = 0;
+	
+	for (int i = 0; i < modArr.length; i++){
+	    if((i+shifter) < _data.length){
+	    if (_data[i+shifter] != 0){
+		modArr[i] =_data[i+shifter];}
+	    else {
+		while ((_data[i+shifter]) == 0){
+		    shifter += 1;}
+		modArr[i] =_data[i+shifter];}}}
+	_data = modArr;}
+		
+	    
+	    
+	    
+	
 
 
     //main method for testing
@@ -83,5 +123,10 @@ public class SuperArray {
 	
 	fleetwood.expand();
 	System.out.println("EXPANDED:\n" + fleetwood.toString());
+	fleetwood.set (1,0);
+	fleetwood.set (5,0);
+	System.out.println("Ugly 0:\n" + fleetwood.toString());
+	fleetwood.alignLeft();
+	System.out.println("Lefted:\n" + fleetwood.toString());
     }//end main	
 }//end class
