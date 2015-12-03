@@ -1,8 +1,8 @@
 /*
 Team Gidiots: Emma Vukelj, James Cao
-HW40
+HW40: Array of Grade 316
 APCS1 pd9
-2015-12-01
+2015-12-02
  */
 /*****************************
  * SKELETON for
