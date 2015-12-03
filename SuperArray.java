@@ -1,6 +1,6 @@
 /*
-Emma Vukelj
-HW39
+Team Gidiots: Emma Vukelj, James Cao
+HW40
 APCS1 pd9
 2015-12-01
  */
@@ -47,7 +47,6 @@ public class SuperArray {
         retArray += "]";
 	return retArray;
     }
-
 		
     //double capacity of this SuperArray
     public void expand() { 
@@ -62,7 +61,6 @@ public class SuperArray {
     public int get( int index ) { 
 	return _data[index];
     }
-
 		
     //mutator -- set value at index to newVal, 
     //           return old value at index
@@ -72,30 +70,28 @@ public class SuperArray {
 	return old;
     }
     
-
-  
     //help from some old friends
-      public static boolean linSearch (int[] a, int target){
-    for (int i = 0; i < a.length; i++){
-	if  (a[i] == target){
-	    return true;}}
-    return false;}
+    public static boolean linSearch (int[] a, int target){
+	for (int i = 0; i < a.length; i++){
+	    if  (a[i] == target){return true;}
+	}
+	return false;
+    }
 
     public static int freq (int[] a, int target){
-    int counter = 0;
-    if (linSearch (a,target) == false){
-      return 0;}
-    else{
-      for (int i = 0; i < a.length; i++){
-      if (a[i] == (target)){
-        counter += 1;}}}
-    return counter;}
+	int counter = 0;
+	if (linSearch (a,target) == false){return 0;}
+	else {
+	    for (int i = 0; i < a.length; i++){
+		if (a[i] == (target)){counter += 1;}}
+	}
+	return counter;
+    }
     //#throwbackthursdays
-    
 
     public void alignLeft() {
 	int counter = freq (_data,0); // records the number of 0s
-	int[] modArr = new int [_data.length - counter]; //creates a new array with length subtracted by the number of zeroes
+	int[] modArr = new int [_data.length - counter]; //new array with length subtracted by number of zeroes
 	int shifter = 0; // skips over 0s
 	
 	for (int i = 0; i < modArr.length; i++){
@@ -121,15 +117,29 @@ public class SuperArray {
 		if ((_data[i+shifter]) == 0){
 		    shifter = 1;}
 		modArr[i] =_data[i+shifter];}}}
-	_data = modArr;}
+	_data = modArr;
+    }
 
-		
-	    
-	    
-	    
+    public void add (int newVal) {
+	int[] modArr = new int[_data.length + 1];
+	for (int i=0; i<_data.length; i++){modArr[i] = _data[i];}
+	modArr[_data.length] = newVal;
+	_data = modArr;
+    }
+
+    public void addAtIndex(int index, int newVal) {
+	int[] modArr = new int[_data.length + 1];
+	int modCtr = 0;
+	for (int i=0; i<_data.length; i++){
+	    if (i==index){
+		modArr[i] = newVal;
+		modCtr = 1;
+	    }
+	    modArr[i + modCtr] = _data[i];
+	}
+	_data = modArr;
+    }
 	
-
-
     //main method for testing
     public static void main( String[] args ) {
 	SuperArray fleetwood = new SuperArray(); //next, populate superArray
@@ -153,6 +163,12 @@ public class SuperArray {
 
 	fleetwood.alignLeft();
 	System.out.println("LEFTED:\n" + fleetwood.toString());//To the left, to the left
+
+	fleetwood.add(9);
+	System.out.println("ADDED A 9:\n" + fleetwood.toString());
+
+	fleetwood.addAtIndex(4,3);
+	System.out.println("ADDED A 3 AT INDEX 4:\n" + fleetwood.toString());
 
     }//end main	
 }//end class
